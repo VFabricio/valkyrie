@@ -30,4 +30,24 @@ describe('maybe', () => {
     const noNumber = Maybe.nothing()
     expect(noNumber.getOrElse(0)).toBe(0)
   })
+
+  test('matchWith works on Some', () => {
+    const someNumber = Maybe.of(42)
+    const result = someNumber.matchWith({
+      Some: () => 'yes',
+      Nothing: () => 'no',
+    })
+
+    expect(result).toBe('yes')
+  })
+
+  test('matchWith works on Nothing', () => {
+    const noNumber = Maybe.nothing()
+    const result = noNumber.matchWith({
+      Some: () => 'yes',
+      Nothing: () => 'no',
+    })
+
+    expect(result).toBe('no')
+  })
 })

@@ -1,3 +1,8 @@
+type MaybePatterns<T, U> = {
+  Some: (value: T) => U,
+  Nothing: () => U,
+}
+
 abstract class MaybeBase<T> {
   abstract readonly kind: 'Nothing' | 'Some'
 
@@ -12,6 +17,8 @@ abstract class MaybeBase<T> {
   }
 
   abstract getOrElse(d: T): T
+
+  abstract matchWith<U>(patterns: MaybePatterns<T, U>): U
 }
 
 class Nothing extends MaybeBase<never> {
@@ -19,6 +26,10 @@ class Nothing extends MaybeBase<never> {
 
   getOrElse<T>(d: T) {
     return d
+  }
+
+  matchWith<T, U>(patterns: MaybePatterns<T, U>): U {
+    return patterns.Nothing()
   }
 }
 
@@ -32,6 +43,10 @@ class Some<T> extends MaybeBase<T> {
   /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
   getOrElse(_d: T) {
     return this.value
+  }
+
+  matchWith<U>(patterns: MaybePatterns<T, U>): U {
+    return patterns.Some(this.value)
   }
 }
 
