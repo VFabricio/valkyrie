@@ -16,6 +16,9 @@ abstract class MaybeBase<T> {
     return this.kind === 'Some'
   }
 
+  /* eslint-disable-next-line no-use-before-define */
+  abstract chain<U>(transformer: (value: T) => Maybe<U>): Maybe<U>
+
   abstract getOrElse(d: T): T
 
   abstract matchWith<U>(patterns: MaybePatterns<T, U>): U
@@ -26,6 +29,11 @@ abstract class MaybeBase<T> {
 
 class Nothing extends MaybeBase<never> {
   readonly kind = 'Nothing'
+
+  /* eslint-disable-next-line no-use-before-define, @typescript-eslint/no-unused-vars */
+  chain<U>(_transformer: (value: never) => Maybe<U>): Maybe<U> {
+    return this
+  }
 
   getOrElse<T>(d: T) {
     return d
@@ -46,6 +54,11 @@ class Some<T> extends MaybeBase<T> {
 
   constructor(public value: T) {
     super()
+  }
+
+  /* eslint-disable-next-line no-use-before-define */
+  chain<U>(transformer: (value: T) => Maybe<U>): Maybe<U> {
+    return transformer(this.value)
   }
 
   /* eslint-disable-next-line @typescript-eslint/no-unused-vars */

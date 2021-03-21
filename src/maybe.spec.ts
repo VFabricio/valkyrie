@@ -94,4 +94,22 @@ describe('maybe', () => {
       expect(mappedNumber.getOrElse(0)).toBe(0)
     })
   })
+
+  describe('chain', () => {
+    it('works with Some', () => {
+      const someNumber = Maybe.of(42)
+      const anotherMaybeNumber = someNumber.chain(x => Maybe.of(x))
+
+      expect(anotherMaybeNumber.getOrElse(0)).toBe(42)
+    })
+  })
+
+  describe('chain', () => {
+    it('works with Nothing', () => {
+      const noNumber = Maybe.nothing()
+      const anotherMaybeNumber = noNumber.chain<number>(x => Maybe.of(x))
+
+      expect(anotherMaybeNumber.getOrElse(0)).toBe(0)
+    })
+  })
 })
