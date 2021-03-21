@@ -20,4 +20,14 @@ describe('maybe', () => {
     const noNumber = Maybe.nothing()
     expect(noNumber.isNothing()).toBe(true)
   })
+
+  test('getOrElse returns the internal value for Some', () => {
+    const someNumber = Maybe.of(42)
+    expect(someNumber.getOrElse(0)).toBe(42)
+  })
+
+  test('getOrElse returns the alternate value for Nothing', () => {
+    const someNumber = Maybe.nothing()
+    expect(someNumber.getOrElse(0)).toBe(0)
+  })
 })

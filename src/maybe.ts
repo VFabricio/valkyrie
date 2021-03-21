@@ -11,13 +11,13 @@ abstract class MaybeBase<T> {
     return this.kind === 'Some'
   }
 
-  abstract getOrDefault(d: T): T
+  abstract getOrElse(d: T): T
 }
 
 class Nothing extends MaybeBase<never> {
   readonly kind = 'Nothing'
 
-  getOrDefault<T>(d: T) {
+  getOrElse<T>(d: T) {
     return d
   }
 }
@@ -29,7 +29,8 @@ class Some<T> extends MaybeBase<T> {
     super()
   }
 
-  getOrDefault() {
+  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
+  getOrElse(_d: T) {
     return this.value
   }
 }
