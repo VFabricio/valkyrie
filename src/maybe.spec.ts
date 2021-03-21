@@ -80,4 +80,18 @@ describe('maybe', () => {
       expect(maybeNumber.isSome()).toBe(true)
     })
   })
+
+  describe('map', () => {
+    it('works with Some', () => {
+      const someNumber = Maybe.of(42)
+      const mappedNumber = someNumber.map(x => x + 1)
+      expect(mappedNumber.getOrElse(0)).toBe(43)
+    })
+
+    it('works with Nothing', () => {
+      const noNumber = Maybe.nothing()
+      const mappedNumber = noNumber.map(x => x + 1)
+      expect(mappedNumber.getOrElse(0)).toBe(0)
+    })
+  })
 })

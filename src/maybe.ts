@@ -19,6 +19,9 @@ abstract class MaybeBase<T> {
   abstract getOrElse(d: T): T
 
   abstract matchWith<U>(patterns: MaybePatterns<T, U>): U
+
+  /* eslint-disable-next-line no-use-before-define */
+  abstract map<U>(transformer: (value: T) => U): Maybe<U>
 }
 
 class Nothing extends MaybeBase<never> {
@@ -30,6 +33,11 @@ class Nothing extends MaybeBase<never> {
 
   matchWith<T, U>(patterns: MaybePatterns<T, U>): U {
     return patterns.Nothing()
+  }
+
+  /* eslint-disable-next-line no-use-before-define, @typescript-eslint/no-unused-vars */
+  map<U>(_transformer: (value: never) => U): Maybe<U> {
+    return this
   }
 }
 
@@ -47,6 +55,11 @@ class Some<T> extends MaybeBase<T> {
 
   matchWith<U>(patterns: MaybePatterns<T, U>): U {
     return patterns.Some(this.value)
+  }
+
+  /* eslint-disable-next-line no-use-before-define */
+  map<U>(transformer: (value: T) => U): Maybe<U> {
+    return new Some(transformer(this.value))
   }
 }
 
