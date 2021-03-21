@@ -27,7 +27,7 @@ describe('maybe', () => {
   })
 
   test('getOrElse returns the alternate value for Nothing', () => {
-    const someNumber = Maybe.nothing()
-    expect(someNumber.getOrElse(0)).toBe(0)
+    const noNumber = Maybe.nothing()
+    expect(noNumber.getOrElse(0)).toBe(0)
   })
 })
