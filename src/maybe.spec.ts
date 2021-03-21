@@ -50,4 +50,24 @@ describe('maybe', () => {
 
     expect(result).toBe('no')
   })
+
+  test('fromNullable works with null', () => {
+    const maybeNumber = Maybe.fromNullable(null)
+    expect(maybeNumber.isNothing()).toBe(true)
+  })
+
+  test('fromNullable works with undefined', () => {
+    const maybeNumber = Maybe.fromNullable(undefined)
+    expect(maybeNumber.isNothing()).toBe(true)
+  })
+
+  test('fromNullable works with other falsy values', () => {
+    const maybeNumber = Maybe.fromNullable(0)
+    expect(maybeNumber.isSome()).toBe(true)
+  })
+
+  test('fromNullable works with truthy values', () => {
+    const maybeNumber = Maybe.fromNullable(42)
+    expect(maybeNumber.isSome()).toBe(true)
+  })
 })

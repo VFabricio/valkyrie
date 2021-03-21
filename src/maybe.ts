@@ -53,7 +53,13 @@ class Some<T> extends MaybeBase<T> {
 type Maybe<T> = Some<T> | Nothing
 
 const of = <T>(value: T): Some<T> => new Some(value)
+
 const nothing = () => new Nothing()
 
+const fromNullable = <T>(value: T): Maybe<T> => (
+  value === null || value === undefined ? nothing()
+  : /* otherwise */                       of(value)
+)
+
 export type { Maybe }
-export { of, nothing }
+export { of, fromNullable, nothing }
