@@ -29,7 +29,9 @@
     ],
     "rules": {
         "arrow-parens": ["error", "as-needed"],
+        "class-methods-use-this": "off",
         "indent": ["error", 2, {"flatTernaryExpressions": true}],
+        "max-classes-per-file": "off",
         "no-console": "off",
         "no-multi-spaces": ["error", {"exceptions": { "ConditionalExpression": true }}],
         "no-nested-ternary": "off",
