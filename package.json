@@ -8,7 +8,7 @@
     "build": "rollup -c",
     "clean": "rimraf dist",
     "commit": "cz",
-    "postinstall": "husky install",
+    "_postinstall": "husky install",
     "postpublish": "pinst --enable",
     "prebuild": "npm run clean",
     "prepare": "npm run build",
