@@ -1,5 +1,8 @@
-const main = (greeting: string): void => {
-  console.log(greeting)
-}
+import { of, fromNullable, nothing } from './maybe'
+import { fail, success, _try } from './result'
 
-main('Hello, World!')
+import type { Maybe } from './maybe'
+import type { Result } from './result'
+
+export { of, fail, fromNullable, nothing, success, _try }
+export type { Maybe, Result }
