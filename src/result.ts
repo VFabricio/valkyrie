@@ -84,17 +84,17 @@ class Success<S, F> extends ResultBase<S, F> {
 
 type Result<S, F> = Success<S, F> | Failure<S, F>
 
-const of = <S, F>(value: S): Success<S, F> => new Success(value)
+const success = <S, F>(value: S): Success<S, F> => new Success(value)
 
 const fail = <S, F>(error: F): Failure<S, F> => new Failure(error)
 
 const _try = <S>(testedFunction: () => S): Result<S, unknown> => {
   try {
-    return of(testedFunction())
+    return success(testedFunction())
   } catch (e) {
     return fail(e) as Result<S, unknown>
   }
 }
 
 export type { Result }
-export { fail, of, _try }
+export { fail, success, _try }

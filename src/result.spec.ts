@@ -3,12 +3,12 @@ import * as Result from './result'
 describe('result', () => {
   describe('of', () => {
     it('is Success', () => {
-      const successNumber = Result.of(42)
+      const successNumber = Result.success(42)
       expect(successNumber.isSuccess()).toBe(true)
     })
 
     it('is not Failure', () => {
-      const successNumber = Result.of(42)
+      const successNumber = Result.success(42)
       expect(successNumber.isFailure()).toBe(false)
     })
   })
@@ -27,7 +27,7 @@ describe('result', () => {
 
   describe('getOrElse', () => {
     it('returns the internal value for Success', () => {
-      const successNumber = Result.of(42)
+      const successNumber = Result.success(42)
       expect(successNumber.getOrElse(() => 0)).toBe(42)
     })
 
@@ -62,7 +62,7 @@ describe('result', () => {
 
   describe('matchWith', () => {
     it('works on Success', () => {
-      const successNumber = Result.of(42)
+      const successNumber = Result.success(42)
       const result = successNumber.matchWith({
         Success: () => 'yes',
         Failure: () => 'no',
@@ -84,7 +84,7 @@ describe('result', () => {
 
   describe('map', () => {
     it('works with Success', () => {
-      const successNumber = Result.of(42)
+      const successNumber = Result.success(42)
       const mappedNumber = successNumber.map(x => x + 1)
       expect(mappedNumber.getOrElse(() => 0)).toBe(43)
     })
@@ -98,14 +98,14 @@ describe('result', () => {
 
   describe('chain', () => {
     it('works with Success to Success', () => {
-      const successNumber = Result.of(42)
-      const anotherResultNumber = successNumber.chain(x => Result.of(x))
+      const successNumber = Result.success(42)
+      const anotherResultNumber = successNumber.chain(x => Result.success(x))
 
       expect(anotherResultNumber.getOrElse(() => 0)).toBe(42)
     })
 
     it('works with Success to Failure', () => {
-      const successNumber = Result.of(42)
+      const successNumber = Result.success(42)
       const anotherResultNumber = successNumber.chain(() => Result.fail(0))
 
       expect(anotherResultNumber.getOrElse(x => x)).toBe(0)
@@ -113,7 +113,7 @@ describe('result', () => {
 
     it('works with Failure to Success', () => {
       const failureNumber = Result.fail(0)
-      const anotherResultNumber = failureNumber.chain(() => Result.of(42))
+      const anotherResultNumber = failureNumber.chain(() => Result.success(42))
 
       expect(anotherResultNumber.getOrElse(x => x)).toBe(0)
     })
