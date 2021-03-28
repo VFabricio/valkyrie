@@ -1,8 +1,8 @@
 {
   "name": "valkyrie-ts",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A library for functional programming in idiomatic Typescript",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
   "module": "dist/index.esm.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
